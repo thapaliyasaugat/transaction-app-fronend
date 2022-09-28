@@ -1,0 +1,109 @@
+.allTransactions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+.allTransactionsContainer{
+    width: 80%;
+    max-width: 1350px;
+    margin-top:10px;
+    display: flex;
+    flex-direction: column;
+}
+.transictionFilter{
+    display: flex;
+    flex-direction: column;
+margin-bottom: 20px;
+background-color: rgb(251, 248, 248);
+/* padding: 10px 0; */
+margin: 15px;
+border-radius: 13px;
+}
+.filterTop{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px;
+}
+.filterTop > div{
+    display: flex;
+    align-items: center;
+}
+.transictionFilter button{
+    align-self: flex-end;
+}
+.transactionFilterSearch{
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    height: 40px;
+    padding-left: 5px;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+.transactionFilterSearch input{
+    padding: 6px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 17px;
+}
+.transactionFilterSearch button{
+    height: 100%;
+    font-size: 16px;
+    font-weight: 300;
+    cursor: pointer;
+    border: none;
+    padding: 0 4px;
+    border-radius: 10px;
+    outline: none;
+    border-left: 2px solid rgb(183, 183, 183);
+
+}
+.transactionByDate{
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+.transactionByDate div{
+    display: flex;
+    flex-direction: column;
+}
+.transactionByDate h2{
+    font-size: 12px;
+    align-self: flex-start;
+}
+.transactionByDate input{
+    padding: 5px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 1px solid gray;
+    outline: none;
+    font-size: 14px;
+    margin-right: 14px;
+}
+.transactionByDate button{
+    height: 70%;
+    align-self: flex-end;
+    font-size: 16px;
+    font-weight: 300;
+    cursor: pointer;
+    border: none;
+    padding: 0 8px;
+    border-radius: 10px;
+    outline: none;
+    border-left: 2px solid rgb(183, 183, 183);
+}
+@media screen and (max-width:1050px) {
+     .filterTop{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 15px;
+    }
+    .transactionFilterSearch{
+    margin-bottom: 25px;
+    }
+    
+}

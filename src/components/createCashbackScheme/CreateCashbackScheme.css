@@ -1,0 +1,78 @@
+.createcashback{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.createcashbackcontainer{
+    width: 100%;
+    margin-top:10px;
+    display: flex;
+    flex-direction: column;
+}
+.createcashbackform{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 1px solid gray;
+    padding: 10px;
+    height: 40vh;
+    margin: 12px 0px;
+    font-size: 20px;
+}
+.formtop{
+    display: flex;
+    flex-direction: column; 
+    background-color: rgb(235, 235, 235);
+    height: 100%;
+    flex: 2;  
+}
+.formtop .cashbackform{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 12px 0px;
+}
+.cashbackform input{
+    padding: 12px;
+    font-size: 14px;
+    width: 50%;
+    border: none;
+    outline: none;
+    /* color: white; */
+
+}
+.cashbackform textarea{
+    resize: none;
+    height: 70px;
+    width: 50%;
+    outline: none;
+    padding: 12px;
+    border: none;
+}
+.formbottom{
+    flex: 2;
+     padding: 12px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+@media screen and (max-width:1000px) {
+    .createcashbackform{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: auto;
+    }
+    .formtop{
+        width: 100%;
+    }
+    .formbottom{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    
+}

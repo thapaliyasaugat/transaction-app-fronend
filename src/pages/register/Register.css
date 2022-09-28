@@ -1,0 +1,41 @@
+.register{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: lightblue;
+}
+.registerContainer{
+    width: 50%;
+    max-width: 600px;
+    height: 50%;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 30px;
+}
+.registerContainer h2{
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+.registerContainer form{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 100%;
+    justify-content: space-evenly;
+}
+.registerContainer form input{
+    padding: 10px 0;
+    font-size: 20px;background-color: rgb(218, 208, 208);
+    border: none;
+    outline: none;
+    text-align: center;
+}
+.registerContainer p{
+    text-align: center;
+    font-size: 15px;
+}

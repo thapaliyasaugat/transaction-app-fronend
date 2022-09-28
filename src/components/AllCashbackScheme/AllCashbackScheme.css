@@ -1,0 +1,13 @@
+.allcashbackscheme{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+.allcashbackschemecontainer{
+    width: 80%;
+    max-width: 1350px;
+    margin-top:10px;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,29 @@
+.admin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+.adminContainer{
+    width: 80%;
+    max-width: 1350px;
+    margin-top:10px;
+    display: flex;
+    flex-direction: column;
+}
+.adminAllCashback{
+    width: 20%;
+}
+.adminAllUserStack{
+    margin: 15px 0px;
+}
+@media screen and (max-width:900px) {
+.adminAllCashback{
+    width: 50%;
+}   
+}
+@media screen and (max-width:400px) {
+    .adminAllCashback{
+        width: 100%;
+    }   
+    }
