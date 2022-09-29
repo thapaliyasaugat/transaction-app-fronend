@@ -26,16 +26,16 @@ const AllTransactions = () => {
     const fetchData = async()=>{
       try{
         let allTransactions;
-        if(searchStatus == "all") allTransactions = await userRequest.post("/transaction/list",{pageNumber:pageNumber,pageSize:8});
-        if(searchStatus == "code") allTransactions = await userRequest.post("/transaction/code",{code:codeValue.current.value});
-        if(searchStatus == "dateInterval") allTransactions = await userRequest.post(`/transaction/time/between?fromDate=${startDate.current.value}&toDate=${endDate.current.value}`,{pageNumber,pageSize:8});
+        if(searchStatus === "all") allTransactions = await userRequest.post("/transaction/list",{pageNumber:pageNumber,pageSize:8});
+        if(searchStatus === "code") allTransactions = await userRequest.post("/transaction/code",{code:codeValue.current.value});
+        if(searchStatus === "dateInterval") allTransactions = await userRequest.post(`/transaction/time/between?fromDate=${startDate.current.value}&toDate=${endDate.current.value}`,{pageNumber,pageSize:8});
         console.log(allTransactions);
         setTransactions(allTransactions?.data?.data?.content);
         settotalNoOfPages(allTransactions?.data?.data?.totalNoOfPages)
     }catch(err){
       console.log("Erro" + err)
-      toast(err.response.status==403 && "Unauthorized.");
-      toast(err.response.status==400 && "Bad Request");
+      toast(err.response.status===403 && "Unauthorized.");
+      toast(err.response.status===400 && "Bad Request");
     }
     }
 

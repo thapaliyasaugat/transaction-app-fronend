@@ -22,3 +22,14 @@
         flex-direction: column;
     }
 }
+.loadBalanceForm p{
+font-size: 20px;
+margin-top: 12px;
+}
+.loadBalanceForm input{
+    padding: 5px;
+    outline: none;
+}
+.loadBalanceForm .loadbutton{
+    margin: 0px 10px;
+}
