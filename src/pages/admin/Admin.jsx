@@ -61,7 +61,7 @@ const navigate = useNavigate();
 
   const statusUpdate = async()=>{
     try{
-      const updateUserStatus = await userRequest.get(currentUser?.status=="ACTIVE" ? `/admin/block/${currentUser?.id}` : `/admin/activate/${currentUser?.id}`)
+      const updateUserStatus = await userRequest.get(currentUser?.status==="ACTIVE" ? `/admin/block/${currentUser?.id}` : `/admin/activate/${currentUser?.id}`)
       console.log(updateUserStatus);
       window.location.reload();
       handleClose();
@@ -159,7 +159,7 @@ toast("Some error occoured.")
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-           {currentUser?.status == "ACTIVE" ?  "Do You want to block this user" : "Do you want to activate this user"}
+           {currentUser?.status === "ACTIVE" ?  "Do You want to block this user" : "Do you want to activate this user"}
           </Typography>
         <Button onClick={statusUpdate}>Update</Button>
         </Box>
@@ -182,13 +182,13 @@ toast("Some error occoured.")
           Current roles::
           {userRoles?.map(role=><p>{role.name}</p>)}
           </Typography>
-{(userRoles.find(role=>role.name=="CUSTOMER") && userRoles.find(role=>role.name=="TRANSACTION") && !userRoles.find(role=>role.name=="ADMIN")) &&   
+{(userRoles.find(role=>role.name==="CUSTOMER") && userRoles.find(role=>role.name==="TRANSACTION") && !userRoles.find(role=>role.name==="ADMIN")) &&   
          <Button variant='contained' onClick={giveAdminAccess}>give Admin Access</Button> 
 }
-{(userRoles.find(role=>role.name=="CUSTOMER")  && !userRoles.find(role=>role.name=="TRANSACTION") && !userRoles.find(role=>role.name=="ADMIN"))&&   
+{(userRoles.find(role=>role.name==="CUSTOMER")  && !userRoles.find(role=>role.name==="TRANSACTION") && !userRoles.find(role=>role.name==="ADMIN"))&&   
          <Button variant='contained' onClick={giveTransactionAccess}>give Transactions Access</Button> 
 }
-{(userRoles.find(role=>role.name=="ADMIN"))&&   
+{(userRoles.find(role=>role.name==="ADMIN"))&&   
          <h2>{currentUser?.userName} is ADMIN...</h2>
 }
 
