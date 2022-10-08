@@ -8,6 +8,7 @@ import {BrowserRouter,Routes,Route, Navigate} from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
+import CreateNewRole from "./components/createNewRole/CreateNewRole";
 function App() {
   const token = localStorage.getItem("security_token"); 
   const { currentuser } = useSelector(state => state.user)
@@ -21,6 +22,7 @@ function App() {
       <Route path="/transactions" element={ currentuser ? <AllTransactions/> : <Navigate to="/login"/>}/>
       <Route path="/admin" element={ currentuser ? <Admin/> : <Navigate to="/login"/>}/>
       <Route path="allcashbackschemes" element={ currentuser ? <AllCashbackScheme/> : <Navigate to="/login"/>}/>
+      <Route path="/create-role" element={ currentuser ? <CreateNewRole/> : <Navigate to="/login"/>}/>
     </Routes>
     </BrowserRouter>
     {/* <AllTransactions/> */}

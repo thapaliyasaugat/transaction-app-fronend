@@ -145,7 +145,10 @@ toast("Some error occoured.")
     <Stack spacing={5} className="adminAllUserStack">
       <Pagination count={totalNoOfPages} page={pageNumber+1} onChange={handleChange} />
     </Stack>
-    <Button onClick={()=>navigate("/allcashbackschemes")} variant='contained' className='adminAllCashback'>All Cashback Schemes</Button>
+    <div>
+    <Button style={{marginRight:"10px"}} onClick={()=>navigate("/create-role")} variant='contained' className='adminAllCashback'>Create New Role</Button>
+    <Button onClick={()=>navigate("/allcashbackschemes")} variant='outlined' className='adminAllCashback'>All Cashback Schemes</Button>
+    </div>
     <CreateCashbackScheme/>
 
     <Modal

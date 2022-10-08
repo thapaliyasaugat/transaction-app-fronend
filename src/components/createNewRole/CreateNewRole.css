@@ -1,0 +1,34 @@
+.createNewRole{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+.createNewRoleContainer{
+    width: 80%;
+    max-width: 1350px;
+    margin-top:10px;
+    display: flex;
+    flex-direction: column;
+}
+.createRoleBoxForm p{
+    font-size: 21px;
+    margin: 13px 0px;
+}
+.createRoleBoxForm input{
+    padding: 10px;
+    font-size: 17px;
+
+}
+.privilegesList{
+    display: flex;
+    flex-wrap: wrap;
+}
+.mapPrivilege{
+    display: flex;
+    align-items: center;
+    width: 30%;
+}
+.mapPrivilege input{
+    margin-right: 8px;
+}
