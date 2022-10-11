@@ -22,10 +22,11 @@ function App() {
       <Route path="/transactions" element={ currentuser ? <AllTransactions/> : <Navigate to="/login"/>}/>
       <Route path="/admin" element={ currentuser ? <Admin/> : <Navigate to="/login"/>}/>
       <Route path="allcashbackschemes" element={ currentuser ? <AllCashbackScheme/> : <Navigate to="/login"/>}/>
-      <Route path="/create-role" element={ currentuser ? <CreateNewRole/> : <Navigate to="/login"/>}/>
+      {/* <Route path="/create-role" element={ currentuser ? <CreateNewRole/> : <Navigate to="/login"/>}/> */}
+      <Route path="/create-role" element={ <CreateNewRole/>}/>
     </Routes>
     </BrowserRouter>
-    {/* <AllTransactions/> */}
+    {/* <CreateNewRole/> */}
     <ToastContainer/>
     </>
   );

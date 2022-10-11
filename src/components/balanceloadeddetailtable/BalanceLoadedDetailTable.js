@@ -22,7 +22,7 @@ const BalanceLoadedDetailTable = ({balanceloadedDetail}) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {balanceloadedDetail?.map((loadedDetail) => (
+          {balanceloadedDetail?.length !== 0  ? balanceloadedDetail?.map((loadedDetail) => (
             <TableRow
               key={loadedDetail.code}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -34,7 +34,7 @@ const BalanceLoadedDetailTable = ({balanceloadedDetail}) => {
               <TableCell align="right">{loadedDetail?.loadedFrom}</TableCell>
               <TableCell align="right">{loadedDetail?.amount}</TableCell>
             </TableRow>
-          ))}
+          )) : <p>Balance Not Loaded yet.</p>}
         </TableBody>
       </Table>
     </TableContainer>

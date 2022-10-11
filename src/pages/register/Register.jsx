@@ -17,16 +17,13 @@ const Register = () => {
         const user = await publicRequest.post("/auth/signup", {userName : userName.current.value,
         email:email.current.value,
         password:password.current.value});
-        console.log(user);
         toast("user registered successfully.")
         navigate("/login");
       }
       catch(err){
-        console.log("err" + err?.password);
-        err?.response?.password && toast(err?.response?.password)
-        err?.response?.email && toast(err?.response?.email)
-        err?.response?.userName && toast(err?.response?.userName)
-        toast(err.message)
+        err?.response?.data?.password && toast(err?.response?.data?.password)
+        err?.response?.data?.email && toast(err?.response?.data?.email)
+        err?.response?.data?.userName && toast(err?.response?.data?.userName)
       }
     }
     makeRequest();
@@ -34,7 +31,7 @@ const Register = () => {
   return (
     <div className='register'>
       <div className="registerContainer">
-        <h2>SpringBoot Security Demo</h2>
+        <h2>SpringBoot Transaction</h2>
         <form>
           <input type="text" ref={userName} placeholder='username' />
           <input type="text" ref={email} placeholder='eamil' />
@@ -42,9 +39,6 @@ const Register = () => {
           <Button variant="contained" onClick={(e)=>formSubmit(e)}>Submit</Button>
         </form>
         <p>Already have account <Link to="/login">login here.</Link></p>
-        {/* <Alert severity="success" color="info">
-      User Registered Sucessfully.
-    </Alert> */}
       </div>
     </div>
   )

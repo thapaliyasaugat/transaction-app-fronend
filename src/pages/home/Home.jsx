@@ -1,13 +1,7 @@
 import React, { useEffect, useRef, useState} from 'react'
 import Transaction from '../../components/transaction/Transaction'
 import "./Home.css"
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+
 import { userRequest } from '../../requestMethod';
 import { useNavigate } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
@@ -19,7 +13,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import BalanceLoadedDetailTable from '../../components/balanceloadeddetailtable/BalanceLoadedDetailTable';
-
+import MyTransactions from '../../components/myTransactions/MyTransactions';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -31,8 +25,14 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
 const Home = () => {
+  const roles = useSelector(state=> state?.user?.currentuser?.data?.roles);
+  const [userRoles,setUserRoles]=useState(roles);
+  console.log(roles)
+  const handleChange = (event, value) => {
+    setPageNumber(value-1);
+  };
+  const [totalNoOfPages,settotalNoOfPages] = useState(0);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -43,14 +43,9 @@ const Home = () => {
   const [currentBalance,setcurrentBalance] = useState(null);
   const [loadedBalanceDetail,setloadedBalanceDetail] = useState([]);
   const [pageNumber,setPageNumber] = useState(0);
-  const [totalNoOfPages,settotalNoOfPages] = useState(0);
+
   const [loadedBalancepageNumber,setloadedBalancePageNumber] = useState(0);
   const [loadedBalancetotalNoOfPages,setloadedBalancetotalNoOfPages] = useState(0);
-  const [transactions,setTransactions] = useState([])
-  const [searchStatus,setSearchStatus] = useState("ALL")
-  const handleChange = (event, value) => {
-    setPageNumber(value-1);
-  };
 
   const handleloadedBalanceChange = (event, value) => {
     setloadedBalancePageNumber(value-1);
@@ -62,13 +57,18 @@ const Home = () => {
   const loadBalanceSubmit = async(e)=>{
 e.preventDefault();
 try{
-const data = {loadedFrom:loadFrom.current.value,amount:loadAmount.current.value}
+const data = {loadedFrom:loadFrom.current.value,amount:Number(loadAmount.current.value).toFixed(2)}
+if(data?.loadedFrom.length !==0 && data?.amount > 500.0 ){
 const result = await userRequest.post("/user/load/balance",data);
-console.log(result)
+handleClose();
+toast(result?.data?.message);
+}else{
+  toast("loaded from can't be empty and amount must be valid number above 500");
+}
 }catch(err){
-  toast("Something goes wrong");
-  err?.response?.data?.loadedFrom && toast(err?.response?.data?.loadedFrom);
-  err?.response?.data?.amount && toast(err?.response?.data?.amount);
+  console.log(err)
+  // toast("Something goes wrong");
+  err?.response?.data?.message && toast( err?.response?.data?.message);
 }
   }
 
@@ -89,41 +89,37 @@ fetchData();
           console.log(user?.data?.data)
           setName(user?.data?.data?.userName);
           setcurrentBalance(user?.data?.data?.balance);
-          let myTransactions = null;
-          if(searchStatus === "ALL"){ myTransactions = await userRequest.post("transaction/my_transactions?filter=all",{pageNumber:pageNumber,pageSize:5})};
-          if(searchStatus === "SEND"){myTransactions = await userRequest.post("transaction/my_transactions?filter=SEND",{pageNumber:pageNumber,pageSize:5})};
-          if(searchStatus === "RECEIVED"){myTransactions = await userRequest.post("transaction/my_transactions?filter=RECEIVED",{pageNumber:pageNumber,pageSize:5})};
-          console.log("mytransactions :: " + myTransactions);
-          settotalNoOfPages(myTransactions?.data?.data?.totalNoOfPages)
-          setTransactions(myTransactions?.data?.data?.content);
-          // console.log("transactios :: " ,transactions )
       }
    fetchData();
-  },[pageNumber,searchStatus])
+  },[])
 
   const allTransactions = async() =>{
     try{
-    console.log("alll transactions clicked.");
-    const transactions = await userRequest.post("/transaction/list",{pageNumber:0,pageSize:5});
-    console.log(transactions)
+
+      let myroles = userRoles.filter(role=> (role.name ===  "TRANSACTION"  || role.name ==="ADMIN-SUPPORT" || role.name==="ADMIN"));
+      if(myroles.length>0){
       navigate("/transactions");
+      }else{
+toast("Not Allowed.");
+      }
   }catch(err){
     console.log("error" + err)
-    toast(err?.message);
-    toast(err?.response?.data?.message);
+    toast(err);
   }
   }
 
   const admin = async()=>{
-try {
-  console.log("Admin clicked");
-  const admin = await userRequest.post("/user/",{pageNumber:0,pageSize:5});
-  console.log(admin);
-  navigate("/admin")
-} catch (error) {
-  console.log("error" + error);
-  toast("Not Allowed");
-}
+    try{
+      let myroles = userRoles.filter(role=> (role.name ==="ADMIN-SUPPORT" || role.name==="ADMIN"));
+      if(myroles.length>0){
+      navigate("/admin");
+      }else{
+toast("Not Allowed.");
+      }
+  }catch(err){
+    console.log("error" + err)
+    toast(err);
+  }
   }
   const logoutClicked = () => {
     logout(dispatch);
@@ -143,46 +139,9 @@ try {
             <div className="homeBody">
             <Button onClick={allTransactions}>All Transactions</Button>
               <Button onClick={admin}>ADMIN</Button>
-              <h2 style={{marginBottom:"12px"}}>MY Transactions</h2>
-              <div>
-                <Button variant={searchStatus==="ALL" && "contained"} onClick={()=>(setSearchStatus("ALL"),setPageNumber(0))}>All</Button>
-                <Button variant={searchStatus==="SEND" && "contained"} onClick={()=>(setSearchStatus("SEND"),setPageNumber(0))}>Send</Button>
-                <Button variant={searchStatus==="RECEIVED" && "contained"} onClick={()=>(setSearchStatus("RECEIVED"),setPageNumber(0))}>Received</Button>
-              </div>
-            <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>id</TableCell>
-            <TableCell align="right">Code</TableCell>
-            <TableCell align="right">Sender</TableCell>
-            <TableCell align="right">Receiver</TableCell>
-            <TableCell align="right">Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {transactions?.length !== 0 ? transactions.map((transaction) => (
-            <TableRow
-              key={transaction.code}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {transaction?.id}
-              </TableCell>
-              <TableCell align="right">{transaction?.code}</TableCell>
-              <TableCell align="right">{transaction?.customer_from?.userName}</TableCell>
-              <TableCell align="right">{transaction?.customer_to?.userName}</TableCell>
-              <TableCell align="right">{transaction.amount}</TableCell>
-            </TableRow>
-          ))
-        :<h2>No Transactions Performed</h2>}
-        </TableBody>
-      </Table>
-    </TableContainer>
 
-    <Stack spacing={5}>
-      <Pagination count={totalNoOfPages} page={pageNumber+1} onChange={handleChange} />
-    </Stack>
+              <MyTransactions/>
+
     {/* balance loaded */}
     <h2 style={{margin:"12px 0px"}}>Balance Loaded History</h2>
    <BalanceLoadedDetailTable balanceloadedDetail={loadedBalanceDetail}></BalanceLoadedDetailTable>

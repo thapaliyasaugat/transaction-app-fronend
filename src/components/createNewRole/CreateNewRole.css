@@ -27,7 +27,7 @@
 .mapPrivilege{
     display: flex;
     align-items: center;
-    width: 30%;
+    min-width: 50%;
 }
 .mapPrivilege input{
     margin-right: 8px;

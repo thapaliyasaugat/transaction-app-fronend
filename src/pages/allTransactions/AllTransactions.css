@@ -22,6 +22,7 @@ border-radius: 13px;
 }
 .filterTop{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     margin: 15px;
@@ -61,20 +62,22 @@ border-radius: 13px;
     border-left: 2px solid rgb(183, 183, 183);
 
 }
-.transactionByDate{
+.transactionByFilter{
     display: flex;
+    flex-wrap: wrap;
+    min-width: 50%;
     align-items: center;
-    height: 50px;
+    /* height: 50px; */
 }
-.transactionByDate div{
+.transactionByFilter div{
     display: flex;
     flex-direction: column;
 }
-.transactionByDate h2{
+.transactionByFilter h2{
     font-size: 12px;
     align-self: flex-start;
 }
-.transactionByDate input{
+.transactionByFilter input{
     padding: 5px;
     border-radius: 10px;
     background-color: transparent;
@@ -83,17 +86,18 @@ border-radius: 13px;
     font-size: 14px;
     margin-right: 14px;
 }
-.transactionByDate button{
+.transactionByFilter button{
     height: 70%;
     align-self: flex-end;
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 500;
     cursor: pointer;
     border: none;
     padding: 0 8px;
     border-radius: 10px;
     outline: none;
     border-left: 2px solid rgb(183, 183, 183);
+    color: rgb(2, 2, 255);
 }
 @media screen and (max-width:1050px) {
      .filterTop{

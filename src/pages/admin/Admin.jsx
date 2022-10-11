@@ -73,7 +73,7 @@ const navigate = useNavigate();
       }
   const getRoleOfuser = async(user)=>{
     try {
-      const userRoles = await userRequest.get(`/admin/role/${user?.id}`);
+      const userRoles = await userRequest.get(`/admin/role/id/${user?.id}`);
       setUserRoles(userRoles.data.data);
 console.log("userRoles :: " + userRoles);
     } catch (error) {

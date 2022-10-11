@@ -21,7 +21,7 @@ const CreateCashbackScheme = () => {
         const fetchData = async()=>{
             const roles = await userRequest.get("/admin/role/all");
             // console.log(roles);
-            setAvailableRole(roles?.data);
+            setAvailableRole(roles?.data?.data);
             console.log("available roles :: ", availabelRole)
         }
         fetchData();
